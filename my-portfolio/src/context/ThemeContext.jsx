@@ -1,14 +1,14 @@
-import { createContext, useState } from "react";
+// src/context/ThemeContext.jsx
+import { createContext, useState } from 'react';
 
-// Create the context
 export const ThemeContext = createContext();
 
-// Create the provider component
 export const ThemeProvider = ({ children }) => {
   const [isDark, setIsDark] = useState(true);
+  const toggleTheme = () => setIsDark((prev) => !prev);
 
   return (
-    <ThemeContext.Provider value={{ isDark, setIsDark }}>
+    <ThemeContext.Provider value={{ isDark, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );
