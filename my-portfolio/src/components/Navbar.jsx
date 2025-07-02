@@ -1,24 +1,48 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Nav, Navbar as BsNavbar } from 'react-bootstrap';
+import { useContext } from 'react';
+import { ThemeContext } from '../context/ThemeContext';
+import ThemeToggle from './ThemeToggle';
 
 const Navbar = () => {
+  const { isDark, setIsDark } = useContext(ThemeContext);
+
   return (
-    <BsNavbar bg="dark" variant="dark" expand="lg">
-      <Container>
-        <BsNavbar.Brand as={Link} to="/">My Portfolio</BsNavbar.Brand>
-        <BsNavbar.Toggle aria-controls="basic-navbar-nav" />
-        <BsNavbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
-            <Nav.Link as={Link} to="/">Home</Nav.Link>
-            <Nav.Link as={Link} to="/about">About</Nav.Link>
-            <Nav.Link as={Link} to="/projects">Projects</Nav.Link>
-            <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
-            <Nav.Link as={Link} to="/resume">Resume</Nav.Link>
-          </Nav>
-        </BsNavbar.Collapse>
-      </Container>
-    </BsNavbar>
+    <nav className={`navbar navbar-expand-lg ${isDark ? 'navbar-dark bg-dark' : 'navbar-light bg-light'} shadow`}>
+      <div className="container">
+        <Link className="navbar-brand fw-bold" to="/">My Portfolio</Link>
+
+        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        <div className="collapse navbar-collapse justify-content-between" id="navbarNav">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <Link className="nav-link" to="/">Home</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/about">About</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/projects">Projects</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/contact">Contact</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/resume">Resume</Link>
+            </li>
+          </ul>
+          
+
+          {/* Theme toggle button on the right */}
+          <div className="d-flex align-items-center">
+            
+            <ThemeToggle isDark={isDark} setIsDark={setIsDark} />
+          </div>
+        </div>
+      </div>
+    </nav>
   );
 };
 
