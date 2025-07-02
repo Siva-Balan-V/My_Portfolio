@@ -1,57 +1,104 @@
-import React from 'react';
-import { Card, Button, Row, Col } from 'react-bootstrap';
+import { motion } from 'framer-motion';
+import { useContext } from 'react';
+import { ThemeContext } from '../context/ThemeContext';
 
-const projects = [
+const projectData = [
   {
     title: 'GST Billing System',
-    description: 'A billing application that generates GST-compliant invoices and manages customer transactions.',
-    tech: 'Python, Tkinter, SQLite',
-    link: 'https://github.com/yourusername/gst-billing-system'
+    description: 'A complete billing solution with GST calculation for small businesses.',
+    tech: 'Python, Tkinter',
+    link: 'https://github.com/Siva-Balan-V/gst-billing-system'
   },
   {
     title: 'Yummy Finder',
-    description: 'A food discovery app that suggests restaurants and dishes based on user preferences.',
-    tech: 'Python, Flask, HTML/CSS, API',
-    link: 'https://github.com/yourusername/yummy-finder'
+    description: 'A smart restaurant and food discovery app with recommendation features.',
+    tech: 'Python, Django, Bootstrap',
+    link: 'https://github.com/Siva-Balan-V/yummy-finder'
   },
   {
-    title: 'AirPreQ – Air Quality Predictor',
-    description: 'Predicts air quality index (AQI) using ML models and visualizes pollution levels.',
-    tech: 'Python, Sklearn, Matplotlib, Flask',
+    title: 'Air Quality Predictor',
+    description: 'A data science project that predicts air quality index using ML models and visualizations.',
+    tech: 'Python, Scikit-learn, Flask',
     link: 'https://github.com/Siva-Balan-V/NM_Sivabalan_AirPreQ'
   },
   {
     title: 'Customer Churn Prediction',
-    description: 'Machine learning project to predict if a customer will churn based on their usage patterns.',
-    tech: 'Python, Pandas, Scikit-learn, Flask',
-    link: 'https://github.com/yourusername/customer-churn'
-  },
-  {
-    title: 'Movie Recommendation System',
-    description: 'AI-powered app that recommends movies based on user ratings and preferences.',
-    tech: 'Python, Streamlit, Cosine Similarity',
-    link: 'https://github.com/yourusername/movie-recommendation'
+    description: 'A machine learning model to predict customer churn in e-commerce platforms.',
+    tech: 'Python, Pandas, Streamlit',
+    link: 'https://github.com/Siva-Balan-V/customer-churn'
   }
 ];
 
-const Projects = () => (
-  <div>
-    <h2 className="mb-4">Projects</h2>
-    <Row xs={1} md={2} className="g-4">
-      {projects.map((project, idx) => (
-        <Col key={idx}>
-          <Card>
-            <Card.Body>
-              <Card.Title>{project.title}</Card.Title>
-              <Card.Text>{project.description}</Card.Text>
-              <Card.Text><strong>Tech Stack:</strong> {project.tech}</Card.Text>
-              <Button variant="primary" href={project.link} target="_blank">View Project</Button>
-            </Card.Body>
-          </Card>
-        </Col>
-      ))}
-    </Row>
-  </div>
-);
+const Projects = () => {
+  const { isDark } = useContext(ThemeContext);
+
+  return (
+    <div
+      className={`px-4 py-5 ${isDark ? 'bg-dark text-light' : 'bg-light text-dark'}`}
+      style={{
+        minHeight: '100vh',
+        position: 'relative'
+      }}
+    >
+      {/* Background gradient */}
+      <div
+        className="position-absolute top-0 start-0 w-100 h-100"
+        style={{
+          background: isDark
+            ? 'radial-gradient(circle at top left, #0f2027, #203a43, #2c5364)'
+            : 'radial-gradient(circle at top left, #dfe9f3, #ffffff)',
+          opacity: 0.2,
+          zIndex: 0
+        }}
+      ></div>
+
+      <div className="position-relative z-1">
+        <h2 className="mb-5 text-center display-4 fw-bold">Projects</h2>
+        <div className="container">
+          <div className="row row-cols-1 row-cols-md-2 g-4">
+            {projectData.map((project, index) => (
+              <motion.div
+                className="col"
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+              >
+                <motion.div
+                  whileHover={{ scale: 1.03 }}
+                  className="card h-100 border-0 shadow-lg rounded-4 overflow-hidden"
+                  style={{
+                    background: isDark
+                      ? 'linear-gradient(145deg, #1e2a38, #2f3e4d)' // ✨ More contrast & visibility
+                      : 'linear-gradient(135deg, #ffffff 0%, #dbeafe 100%)',
+                    color: isDark ? '#f8f9fa' : '#212529',
+                    border: isDark ? '1px solid #495057' : '1px solid #dee2e6'
+                  }}
+                >
+                  <div className="card-body p-4">
+                    <h5 className="card-title fw-bold mb-2">{project.title}</h5>
+                    <p className="card-text mb-2">{project.description}</p>
+                    <p className="small mb-3">
+                      <strong>Tech Stack:</strong> {project.tech}
+                    </p>
+                    <a
+                      href={project.link}
+                      className={`btn ${isDark ? 'btn-outline-light' : 'btn-outline-dark'} btn-sm rounded-pill px-4 shadow-sm`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View on GitHub
+                    </a>
+                  </div>
+                </motion.div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default Projects;

@@ -1,4 +1,3 @@
-// src/pages/Resume.jsx
 const Resume = () => (
   <div>
     <h2 className="mb-3">Resume</h2>
