@@ -2,7 +2,6 @@
 import { motion } from 'framer-motion';
 import { useContext } from 'react';
 import { ThemeContext } from '../context/ThemeContext';
-
 const About = () => {
   const { isDark } = useContext(ThemeContext);
 

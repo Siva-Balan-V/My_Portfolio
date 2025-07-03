@@ -1,7 +1,6 @@
 import { useContext, useRef, useState } from 'react';
 import { ThemeContext } from '../context/ThemeContext';
 import emailjs from '@emailjs/browser';
-import Footer from '../components/Footer';
 const Contact = () => {
   const { isDark } = useContext(ThemeContext);
   const formRef = useRef();

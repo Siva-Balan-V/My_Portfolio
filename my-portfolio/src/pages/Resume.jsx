@@ -21,4 +21,3 @@ const Resume = () => (
 );
 
 export default Resume;
-// This component displays a link to download the resume and an embedded PDF viewer for the resume file.

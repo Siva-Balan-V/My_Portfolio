@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { useContext } from 'react';
 import { ThemeContext } from '../context/ThemeContext';
-
 const projectData = [
   {
     title: 'GST Billing System',
@@ -99,6 +98,5 @@ const Projects = () => {
       </div>
     </div>
   );
-};
-
+};   
 export default Projects;

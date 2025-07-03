@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { ThemeContext } from '../context/ThemeContext';
-import Footer from '../components/Footer';
 
 const Home = () => {
   const { isDark } = useContext(ThemeContext);
@@ -38,7 +37,6 @@ const Home = () => {
           View Projects
         </a>
       </div>
-      <Footer />
     </div>
   );
 };
